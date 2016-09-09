@@ -1,0 +1,7 @@
+mikroblog-mongo:
+    container_name: mikroblog-mongo
+    image: mongo
+    ports:
+        - 27017:27017
+    volumes:
+        - data/:/data/db/
