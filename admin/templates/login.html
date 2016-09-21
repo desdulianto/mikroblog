@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>Mikroblog</h1>
+<form method="post" action="{{ url_for('.login') }}">
+    <div>
+        <label for="username">User Name</label>
+        <input type="text" name="username">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+    </div>
+    <div>
+        <input type="submit" value="Login">
+    </div>
+</form>
+{% endblock %}
