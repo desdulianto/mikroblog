@@ -1,8 +1,6 @@
 from flask import Blueprint
 from flask import session, escape, redirect, url_for, render_template, request
-from flask import abort
 
-from functools import wraps
 from hashlib import sha256
 
 from model import mongo
