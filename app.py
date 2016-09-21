@@ -1,6 +1,9 @@
 from flask import Flask
+from flask import render_template
 from flask_pymongo import PyMongo
 from model import mongo
+
+import pymongo
 
 # application setup
 app = Flask(__name__)
@@ -33,7 +36,8 @@ app.register_blueprint(admin_page.page, url_prefix='/admin')
 
 @app.route('/')
 def index():
-    return 'hello world'
+    posts = mongo.db.posts.find().limit(10).sort('time', pymongo.DESCENDING)
+    return render_template('index.html', posts=posts)
 
 if __name__ == '__main__':
     app.run(debug=True)

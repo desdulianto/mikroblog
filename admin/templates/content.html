@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
 {% block body %}
-{{content|safe}}
+<nav class="top-navigation">
+Hello, <a href="">{{session.username}}</a>, <a href="{{url_for('.logout')}}">Logout!</a>
+</nav>
+<nav class="main-menu">
+    <ul>
+        <li><a href="{{url_for('.new_post')}}">Add Post</a></li>
+    </ul>
+</nav>
+<div class="content">
+    {% block content %}{{content}}{% endblock %}
+</div>
 {% endblock %}
