@@ -17,9 +17,7 @@ def is_login():
 def index():
     if not is_login():
         return render_template('login.html')
-    return render_template('content.html', 
-        content='''Hello %s, silahkan <a href="%s">Logout</a>''' % 
-        (escape(session['username']), url_for('.logout')))
+    return render_template('content.html', content='Admin landing page')
 
 @page.route('/login', methods=['POST'], endpoint='login')
 def login():
