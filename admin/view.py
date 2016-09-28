@@ -18,16 +18,18 @@ def index():
         return render_template('login.html')
     return render_template('content.html', content='Admin landing page')
 
-@page.route('/login', methods=['POST'], endpoint='login')
+@page.route('/login', methods=['GET', 'POST'], endpoint='login')
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    user = mongo.db.users.find_one(dict(username=username))
-    pwd = sha256(password.encode('utf-8')).hexdigest()
-    if user and pwd == user.get('password'):
-        session['username'] = username
-        return redirect(url_for('.index'))
-    return 'login failed'
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = mongo.db.users.find_one(dict(username=username))
+        pwd = sha256(password.encode('utf-8')).hexdigest()
+        if user and pwd == user.get('password'):
+            session['username'] = username
+            return redirect(url_for('.index'))
+        return 'login failed'
+    return render_template('login.html')
 
 @page.route('/logout', endpoint='logout')
 def logout():
