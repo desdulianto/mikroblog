@@ -15,7 +15,7 @@ def is_login():
 @page.route('/', endpoint='index')
 def index():
     if not is_login():
-        return render_template('login.html')
+        return redirect(url_for('.login'))
     return render_template('content.html', content='Admin landing page')
 
 @page.route('/login', methods=['GET', 'POST'], endpoint='login')
@@ -39,7 +39,7 @@ def logout():
 @page.route('/post', methods=['GET', 'POST'], endpoint='new_post')
 def new_post():
     if not is_login():
-        return render_template('login.html')
+        return redirect(url_for('.login'))
     if request.method == 'POST':
         judul = request.form.get('judul')
         isi   = request.form.get('isi')
